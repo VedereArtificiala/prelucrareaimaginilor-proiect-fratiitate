@@ -1,7 +1,8 @@
 import chess
 import chess.engine
 
-
+debug = True
+# debug = False
 class Chess:
     def __init__(self):
         # Create a new chess board
@@ -50,4 +51,4 @@ def test():
         print(game.display_board())
     print("Invalid Move:", move_error)
 
-# test()
+if debug: test()

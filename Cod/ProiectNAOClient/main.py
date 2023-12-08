@@ -1,4 +1,5 @@
 from Socket import Socket
+from Board import Board
 import cv2
 
 
@@ -13,20 +14,21 @@ def main():
     # Conectează-te la server
     client.connect_to_server()
 
+    # Preia imaginea initiala cu tabla
+    img_array = client.request_image()
+
+    # Creeaza o instanta a clasei Board
+
+    board = Board(img_array)
+
     try:
         loop = True
         while loop:
-            # client.send_text_message("e 2 to e 4");
-            # Trimite o comandă de test către server
-            img_array = client.request_image()
-            # For example, display the image
-            while True:
-                cv2.imshow('Processed Image', img_array)
-                # Break the loop if 'q' is pressed
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    loop = False
-                    break
-
+            a = cv2.waitKey(1)
+            if a & 0xFF == ord('q'):
+                loop = False
+            if a & 0xFF == ord(' '):
+                board.get_next_move(client.request_image())
     except Exception as e:
         print("Error in client:", str(e))
 
