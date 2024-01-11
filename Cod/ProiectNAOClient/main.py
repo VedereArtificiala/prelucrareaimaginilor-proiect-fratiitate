@@ -28,9 +28,12 @@ def main():
             if a & 0xFF == ord('q'):
                 loop = False
             if a & 0xFF == ord(' '):
-                board.get_next_move(client.request_image())
+                player_color = board.get_turn()
+                move = board.get_next_move(client.request_image())
+                client.send_move_message(player_color, move)
     except Exception as e:
         print("Error in client:", str(e))
+
 
 if __name__ == "__main__":
     main()

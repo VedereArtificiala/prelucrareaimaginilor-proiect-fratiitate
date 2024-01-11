@@ -55,15 +55,16 @@ class Socket:
             print("Error receiving image:", str(e))
             return None
 
-    def send_text_message(self, message):
+    def send_move_message(self, player_color, move):
         try:
             if self.client_socket:
+                message = f"{player_color.capitalize()} {move}"
                 self.client_socket.send(("SPEAK:" + message).encode())
-                print("Text message sent:", message)
+                print("Move message sent:", message)
             else:
                 print("Not connected to the server. Call connect_to_server() first.")
         except Exception as e:
-            print("Error sending text message:", str(e))
+            print("Error sending move message:", str(e))
 
     def close_connection(self):
         try:

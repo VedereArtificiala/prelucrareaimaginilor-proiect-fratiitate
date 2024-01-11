@@ -46,7 +46,7 @@ class Server:
                 width, height, channels, image_bytes = image_data[0], image_data[1], image_data[2], image_data[6]
                 return width, height, channels, image_bytes
             elif not online:
-                image = cv2.imread("Output/dataset"+str(self.img)+".png")
+                image = cv2.imread("Output/output_image"+str(self.img)+".png")
 
                 self.img += 1
                 return image
@@ -98,11 +98,11 @@ class Server:
                     elif request.startswith("SPEAK:"):
                         # Extract the message from the request
                         message = request[len("SPEAK:"):]
-                        print(message)
+                        # print(message)
                         # Process the message (e.g., use TextToSpeech)
                         self.say_text(str(message))
                         # Send a response back to the client (optional)
-                        print("Message received and processed.")
+                        # print("Message received and processed.")
 
 
         except KeyboardInterrupt:
